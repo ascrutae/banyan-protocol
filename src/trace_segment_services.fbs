@@ -6,7 +6,7 @@ namespace banyan;
 
 rpc_service TraceSegmentSeriesService {
     write(WriteRequest):WriteResponse (streaming: "bidi");
-    query(SelectRequest):SelectResponse (streaming: "bidi");
+    query(SelectRequest):SelectResponse (streaming: "server");
 }
 
 /// V1:
