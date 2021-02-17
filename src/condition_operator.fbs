@@ -1,0 +1,17 @@
+include "data_types.fbs";
+namespace banyan;
+
+enum Operator: byte {Equals, Between, WithPrefix}
+
+table ConditionExpression {
+    operator: Operator;
+    values: [Value];
+}
+
+enum Logic: byte {OR, AND}
+
+table Condition {
+    logic : Logic;
+    expression: ConditionExpression;
+    sub: Condition;
+}

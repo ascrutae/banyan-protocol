@@ -1,0 +1,33 @@
+include "data_types.fbs";
+
+namespace banyan;
+
+// 暂时没有用上，仅仅检查字段是否有遗漏
+table tracesegment {
+    traceid: string;
+    starttime: long;
+    endtime: long;
+    fields: [field];
+    tags: [tag];
+    spans: [byte];
+}
+
+// 暂时没有用上，仅仅检查字段是否有遗漏
+table field {
+    segmentid: string;
+    statement: string;
+    serviceid: string;
+    serviceinstanceid: string;
+    endpointname: string;
+    endpointid: string;
+    latency: int;
+    error: bool;
+    version: string;
+}
+
+// 暂时没有用上，仅仅检查字段是否有遗漏
+table tag {
+    key: string;
+    value: [Value];
+}
+

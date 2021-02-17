@@ -1,0 +1,64 @@
+include "condition_operator.fbs";
+include "trace_segment.fbs";
+include "data_types.fbs";
+
+namespace banyan;
+
+rpc_service TraceSegmentSeriesService {
+    write(WriteRequest):WriteResponse;
+    query(SelectRequest):SelectResponse;
+}
+
+///  V1:
+/// fields:
+///      traceid
+///      starttime
+///      endtime
+///      segmentid
+///      statement
+///      serviceid
+///      serviceinstanceid
+///      endpointname
+///      endpointid
+///      latency
+///      error
+///      version
+///      tags
+///      spans
+///
+/// values:
+///     xxx.xxx.xxx.1
+///     1613526708000
+///     1613526708001
+///     xxx.xxx.xxx.2
+///     xxxx
+///     ASDF@#AD.1
+///     192.168.0.1@localhost
+///     SpringController/test
+///     123
+///     0.1
+///     flase
+///     1.0
+///     [{"http.url", "http://localhost:8080/test"}, {"http.status", "200"}]
+///     [0,1,0,....]
+table WriteRequest {
+    fields: [string];
+    values: [Value];
+}
+
+table WriteResponse {
+}
+
+table SelectRequest {
+    queryfileds: [string] (required);
+    conditions: [Condition] (required);
+}
+
+table SelectResponse {
+    mappings: [FieldMapping];
+}
+
+table FieldMapping {
+    filename: string;
+    fieldvalue: DataType;
+}
