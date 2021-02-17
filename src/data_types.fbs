@@ -2,37 +2,19 @@ namespace banyan;
 
 union DataType {
     String,
-    Double,
-    Integer,
-    Long,
-    Float,
+    Uinteger,
     Boolean,
     StringArray,
-    LongArray,
-    IntegerArray,
-    ByteArray,
 
     Tags,
-}
-
-table Float {
-   value: float64;
 }
 
 table String {
    value: string;
 }
 
-table Double {
-    value: double;
-}
-
-table Integer {
-    value: int;
-}
-
-table Long {
-    value: long;
+table Uinteger {
+    value: uint;
 }
 
 table Boolean {
@@ -41,18 +23,6 @@ table Boolean {
 
 table StringArray {
     value: [string];
-}
-
-table LongArray {
-    value: [long];
-}
-
-table IntegerArray {
-    value: [int];
-}
-
-table ByteArray {
-    value: [byte];
 }
 
 table Value {

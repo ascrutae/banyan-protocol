@@ -5,12 +5,12 @@ include "data_types.fbs";
 namespace banyan;
 
 rpc_service TraceSegmentSeriesService {
-    write(WriteRequest):WriteResponse;
-    query(SelectRequest):SelectResponse;
+    write(WriteRequest):WriteResponse (streaming: "bidi");
+    query(SelectRequest):SelectResponse (streaming: "bidi");
 }
 
-///  V1:
-/// fields:
+/// V1:
+/// key schema:
 ///      traceid
 ///      starttime
 ///      endtime
@@ -42,7 +42,7 @@ rpc_service TraceSegmentSeriesService {
 ///     [{"http.url", "http://localhost:8080/test"}, {"http.status", "200"}]
 ///     [0,1,0,....]
 table WriteRequest {
-    fields: [string];
+    keyschema: [string];
     values: [Value];
 }
 

@@ -10,8 +10,14 @@ table ConditionExpression {
 
 enum Logic: byte {OR, AND}
 
+///  expression: trace_id = 1 AND (endpointName match "product"  OR endpointName match "chart")
+///  logical tree:
+///                     AND
+///   trace_id = 1                                          OR
+///                     endpointName match "product"               endpointName match "chart"
 table Condition {
     logic : Logic;
     expression: ConditionExpression;
-    sub: Condition;
+    left: Condition;
+    right: Condition;
 }

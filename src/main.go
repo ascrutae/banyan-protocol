@@ -48,7 +48,7 @@ func main() {
 	// tag2
 	banyanDB.TagElementStart(builder)
 	banyanDB.TagElementAddKey(builder, httpStatusTagKeyString)
-	banyanDB.TagElementAddValueType(builder, banyanDB.DataTypeInteger)
+	banyanDB.TagElementAddValueType(builder, banyanDB.DataTypeUinteger)
 	banyanDB.TagElementAddValue(builder, status)
 	tag2 := banyanDB.TagElementEnd(builder)
 

@@ -6,8 +6,8 @@ import (
 	flatbuffers "github.com/google/flatbuffers/go"
 )
 
-///  V1:
-/// fields:
+/// V1:
+/// key schema:
 ///      traceid
 ///      starttime
 ///      endtime
@@ -65,7 +65,7 @@ func (rcv *WriteRequest) Table() flatbuffers.Table {
 	return rcv._tab
 }
 
-func (rcv *WriteRequest) Fields(j int) []byte {
+func (rcv *WriteRequest) Keyschema(j int) []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
 	if o != 0 {
 		a := rcv._tab.Vector(o)
@@ -74,7 +74,7 @@ func (rcv *WriteRequest) Fields(j int) []byte {
 	return nil
 }
 
-func (rcv *WriteRequest) FieldsLength() int {
+func (rcv *WriteRequest) KeyschemaLength() int {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
 	if o != 0 {
 		return rcv._tab.VectorLen(o)
@@ -105,10 +105,10 @@ func (rcv *WriteRequest) ValuesLength() int {
 func WriteRequestStart(builder *flatbuffers.Builder) {
 	builder.StartObject(2)
 }
-func WriteRequestAddFields(builder *flatbuffers.Builder, fields flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(fields), 0)
+func WriteRequestAddKeyschema(builder *flatbuffers.Builder, keyschema flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(keyschema), 0)
 }
-func WriteRequestStartFieldsVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
+func WriteRequestStartKeyschemaVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
 	return builder.StartVector(4, numElems, 4)
 }
 func WriteRequestAddValues(builder *flatbuffers.Builder, values flatbuffers.UOffsetT) {

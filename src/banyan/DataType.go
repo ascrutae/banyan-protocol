@@ -7,48 +7,30 @@ import "strconv"
 type DataType byte
 
 const (
-	DataTypeNONE         DataType = 0
-	DataTypeString       DataType = 1
-	DataTypeDouble       DataType = 2
-	DataTypeInteger      DataType = 3
-	DataTypeLong         DataType = 4
-	DataTypeFloat        DataType = 5
-	DataTypeBoolean      DataType = 6
-	DataTypeStringArray  DataType = 7
-	DataTypeLongArray    DataType = 8
-	DataTypeIntegerArray DataType = 9
-	DataTypeByteArray    DataType = 10
-	DataTypeTags         DataType = 11
+	DataTypeNONE        DataType = 0
+	DataTypeString      DataType = 1
+	DataTypeUinteger    DataType = 2
+	DataTypeBoolean     DataType = 3
+	DataTypeStringArray DataType = 4
+	DataTypeTags        DataType = 5
 )
 
 var EnumNamesDataType = map[DataType]string{
-	DataTypeNONE:         "NONE",
-	DataTypeString:       "String",
-	DataTypeDouble:       "Double",
-	DataTypeInteger:      "Integer",
-	DataTypeLong:         "Long",
-	DataTypeFloat:        "Float",
-	DataTypeBoolean:      "Boolean",
-	DataTypeStringArray:  "StringArray",
-	DataTypeLongArray:    "LongArray",
-	DataTypeIntegerArray: "IntegerArray",
-	DataTypeByteArray:    "ByteArray",
-	DataTypeTags:         "Tags",
+	DataTypeNONE:        "NONE",
+	DataTypeString:      "String",
+	DataTypeUinteger:    "Uinteger",
+	DataTypeBoolean:     "Boolean",
+	DataTypeStringArray: "StringArray",
+	DataTypeTags:        "Tags",
 }
 
 var EnumValuesDataType = map[string]DataType{
-	"NONE":         DataTypeNONE,
-	"String":       DataTypeString,
-	"Double":       DataTypeDouble,
-	"Integer":      DataTypeInteger,
-	"Long":         DataTypeLong,
-	"Float":        DataTypeFloat,
-	"Boolean":      DataTypeBoolean,
-	"StringArray":  DataTypeStringArray,
-	"LongArray":    DataTypeLongArray,
-	"IntegerArray": DataTypeIntegerArray,
-	"ByteArray":    DataTypeByteArray,
-	"Tags":         DataTypeTags,
+	"NONE":        DataTypeNONE,
+	"String":      DataTypeString,
+	"Uinteger":    DataTypeUinteger,
+	"Boolean":     DataTypeBoolean,
+	"StringArray": DataTypeStringArray,
+	"Tags":        DataTypeTags,
 }
 
 func (v DataType) String() string {

@@ -6,6 +6,11 @@ import (
 	flatbuffers "github.com/google/flatbuffers/go"
 )
 
+///  expression: trace_id = 1 AND (endpointName match "product"  OR endpointName match "chart")
+///  logical tree:
+///                     AND
+///   trace_id = 1                                          OR
+///                     endpointName match "product"               endpointName match "chart"
 type Condition struct {
 	_tab flatbuffers.Table
 }
@@ -45,28 +50,47 @@ func (rcv *Condition) MutateLogic(n Logic) bool {
 	return rcv._tab.MutateInt8Slot(4, int8(n))
 }
 
-func (rcv *Condition) Expression(obj *ConditionExpression, j int) bool {
+func (rcv *Condition) Expression(obj *ConditionExpression) *ConditionExpression {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
-		x := rcv._tab.Vector(o)
-		x += flatbuffers.UOffsetT(j) * 4
-		x = rcv._tab.Indirect(x)
+		x := rcv._tab.Indirect(o + rcv._tab.Pos)
+		if obj == nil {
+			obj = new(ConditionExpression)
+		}
 		obj.Init(rcv._tab.Bytes, x)
-		return true
+		return obj
 	}
-	return false
+	return nil
 }
 
-func (rcv *Condition) ExpressionLength() int {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
+func (rcv *Condition) Left(obj *Condition) *Condition {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(8))
 	if o != 0 {
-		return rcv._tab.VectorLen(o)
+		x := rcv._tab.Indirect(o + rcv._tab.Pos)
+		if obj == nil {
+			obj = new(Condition)
+		}
+		obj.Init(rcv._tab.Bytes, x)
+		return obj
 	}
-	return 0
+	return nil
+}
+
+func (rcv *Condition) Right(obj *Condition) *Condition {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(10))
+	if o != 0 {
+		x := rcv._tab.Indirect(o + rcv._tab.Pos)
+		if obj == nil {
+			obj = new(Condition)
+		}
+		obj.Init(rcv._tab.Bytes, x)
+		return obj
+	}
+	return nil
 }
 
 func ConditionStart(builder *flatbuffers.Builder) {
-	builder.StartObject(2)
+	builder.StartObject(4)
 }
 func ConditionAddLogic(builder *flatbuffers.Builder, logic Logic) {
 	builder.PrependInt8Slot(0, int8(logic), 0)
@@ -74,8 +98,11 @@ func ConditionAddLogic(builder *flatbuffers.Builder, logic Logic) {
 func ConditionAddExpression(builder *flatbuffers.Builder, expression flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(expression), 0)
 }
-func ConditionStartExpressionVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
-	return builder.StartVector(4, numElems, 4)
+func ConditionAddLeft(builder *flatbuffers.Builder, left flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(left), 0)
+}
+func ConditionAddRight(builder *flatbuffers.Builder, right flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(3, flatbuffers.UOffsetT(right), 0)
 }
 func ConditionEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
